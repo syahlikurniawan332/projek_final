@@ -93,24 +93,9 @@
               <a class="nav-link active" aria-current="page" href="home">Home</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Product
+              <a class="nav-link me-3" href="order.php" role="button" aria-expanded="false">
+                Order Now
               </a>
-              <ul class="dropdown-menu mt-2">
-                <li><a class="dropdown-item" href="bestseller.php">Best Seller</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Beras</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Kecantikan</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Makanan Snack</a></li>
-              </ul>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -124,39 +109,28 @@
                 <li><a class="dropdown-item" href="datapegawai">Data Pegawai</a></li>
               </ul>
             </li>
-            <!-- signin/out -->
-            <li class="nav-item text-light me-4 dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Signin
-              </a>
-              <ul class="dropdown-menu mt-2">
-                <li><a class="dropdown-item" href="daftaruser">Daftar</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="login">Login</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="logout">LogOut</a></li>
-              </ul>
-            </li>
-            <!-- akhir signin/out -->
           </ul>
+          <!-- signin/out -->
+          <li class="nav-item text-light me-4 dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Signin
+            </a>
+            <ul class="dropdown-menu mt-2">
+              <li><a class="dropdown-item" href="daftaruser">Daftar</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="login">Login</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="logout">LogOut</a></li>
+            </ul>
+          </li>
+          <!-- akhir signin/out -->
         </div>
       </div>
     </nav>
-
-    <!-- search -->
-    <nav class="navbar mt-3">
-      <div class="container-fluid d-flex justify-content-end">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
-        </form>
-      </div>
-    </nav>
-    <!-- akhir search -->
   </header>
 
 
