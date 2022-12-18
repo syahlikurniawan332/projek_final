@@ -135,7 +135,22 @@
 
             <div class="col mb-2">
                 <div class="card" style="width: 18rem;">
-                    <img src="gambar/product.jpg" class="card-img-top" alt="produk">
+                    <img src=<?php
+                                if ($statusupload == 0) {
+                                    $message = '<script>alert("' . $message . ', gambar tidak dapat diupload");
+                                    window.location="../databarang"</script>';
+                                } else {
+                                    $select = mysqli_query($conn, "SELECT * FROM tb_databarang where namabarang = '$namabarang'");
+                                    if (mysqli_num_rows($select) > 0) {
+                                        $message = '<script>alert("Nama menu yang dimasukkan telah ada");
+                                        window.location="../databarang"</script>';
+                                    } else {
+
+                                        $message = '<script>alert("maaf terjadi kesalah file tidak dapat diupload");
+                                        window.location="../daftarbarang"</script>';
+                                    }
+                                }
+                                ?>>
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -195,7 +210,7 @@
 
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 
 
 

@@ -1,9 +1,12 @@
 <?php
 include "proses/connect.php";
-$query = mysqli_query($conn, "SELECT * FROM tb_databarang");
+$query = mysqli_query($conn, "SELECT * FROM tb_databarang
+    LEFT JOIN tb_kategoribarang ON tb_kategoribarang.id = tb_databarang.kategori");
 while ($record = mysqli_fetch_array($query)) {
     $result[] = $record;
 }
+
+$select_kat_barang = mysqli_query($conn, "SELECT kategoribarang FROM tb_kategoribarang");
 ?>
 
 <!doctype html>
@@ -45,7 +48,7 @@ while ($record = mysqli_fetch_array($query)) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="needs-validation" novalidate action="proses/proses_Tdatabarang.php" method="POST">
+                                <form class="needs-validation" novalidate action="proses/proses_Tdatabarang.php" method="POST" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-floating mb-3">
@@ -53,6 +56,13 @@ while ($record = mysqli_fetch_array($query)) {
                                                 <label for="floatingInput">Nama Barang</label>
                                                 <div class="invalid-feedback">
                                                     Masukkan Nama Barang
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <input type="file" class="form-control py-3" id="uploadfoto" placeholder="your name" name="foto" required>
+                                                <label class="input-group-text" for="uploadfoto">Upload foto barang</label>
+                                                <div class="invalid-feedback">
+                                                    Masukkan fotobarang
                                                 </div>
                                             </div>
                                         </div>
@@ -87,8 +97,18 @@ while ($record = mysqli_fetch_array($query)) {
                                         </div>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input type="number" class="form-control" id="floatingInput" placeholder="katgori" value="0" name="kategori">
-                                        <label for="floatingInput">Kategori</label>
+                                        <select class="form-select" aria-label="Default select example" name="kategori" required>
+                                            <option selected hidden value="">Pilih Kategori Menu</option>
+                                            <?php
+                                            foreach ($select_kat_barang as $value) {
+                                                echo "<option value=" . $value['idkatbarang'] . ">$value[kategoribarang]</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                        <label for="floatingInput">Kategori Makanan dan Minuman</label>
+                                        <div class="invalid-feedback">
+                                            Pilih Kategori Makanan dan Minuman
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
@@ -114,7 +134,7 @@ while ($record = mysqli_fetch_array($query)) {
                                 </div>
                                 <div class="modal-body">
                                     <form class="needs-validation" novalidate action="proses/proses_edit_barang.php" method="POST">
-                                        <input type="hidden" value="<?php  echo $row['id'] ?>" name="id">
+                                        <input type="hidden" value="<?php echo $row['id'] ?>" name="id">
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-floating mb-3">
@@ -181,9 +201,9 @@ while ($record = mysqli_fetch_array($query)) {
                                 </div>
                                 <div class="modal-body">
                                     <form class="needs-validation" novalidate action="proses/proses_delete_barang.php" method="POST">
-                                        <input type="hidden" value="<?php  echo $row['id'] ?>" name="id">
+                                        <input type="hidden" value="<?php echo $row['id'] ?>" name="id">
                                         <div class="col-lg-12">
-                                            Apakah anda yakin ingin menghapus data barang <b><?php  echo $row['namabarang'] ?></b>
+                                            Apakah anda yakin ingin menghapus data barang <b><?php echo $row['namabarang'] ?></b>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
@@ -211,12 +231,13 @@ while ($record = mysqli_fetch_array($query)) {
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Nama Barang</th>
+                                    <th scope="col">Foto Barang</th>
                                     <th scope="col">Stok Barang</th>
-                                    <th scope="col">Tanggal Masuk Barang</th>
+                                    <th scope="col">Tanggal Masuk</th>
                                     <th scope="col">Letak Barang</th>
+                                    <th scope="col">Jenis Barang</th>
                                     <th scope="col">Kategori</th>
                                     <th scope="col">Aksi</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -228,26 +249,48 @@ while ($record = mysqli_fetch_array($query)) {
                                     <tr>
                                         <th scope="row"><?php echo $no++ ?></th>
                                         <td><?php echo $row['namabarang'] ?></td>
+                                        <td>
+                                            <div style="width: 100px">
+
+                                                <img src="gambar/<?php echo $row['foto'] ?>" class="img-thumbnail" alt="...">
+                                            </div>
+                                        </td>
                                         <td><?php echo $row['stokbarang'] ?></td>
                                         <td><?php echo $row['tanggalmasuk'] ?></td>
                                         <td><?php echo $row['letakbarang'] ?></td>
-                                        <td><?php echo $row['kategori'] ?></td>
-                                        <td class="d-flex">
-                                            <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modaleditbarang<?php echo $row['id'] ?>"><i class="bi bi-pencil-square"></i></button>
-                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modaldeletebarang<?php echo $row['id'] ?>"><i class="bi bi-trash3-fill"></i></button>
+                                        <td>
+                                            <?php echo $row['jenisbarang'];
+                                            if ($row['jenisbarang'] == 1) {
+                                                echo "pempes";
+                                            } elseif ($row['jenisbarang'] == 2) {
+                                                echo "kosmetik";
+                                            } elseif ($row['jenisbarang'] == 3) {
+                                                echo "makanan";
+                                            } else {
+                                                echo "minuman";
+                                            }
+                                            ?>
                                         </td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                        <td><?php echo $row['kategoribarang'] ?></td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modaleditbarang<?php echo $row['id'] ?>"><i class="bi bi-pencil-square"></i></button>
+                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modaldeletebarang<?php echo $row['id'] ?>"><i class="bi bi-trash3-fill"></i></button>
+                                            </div>
+                                        </td>
                     </div>
+                    </tr>
                 <?php
-                }
+                                }
                 ?>
+                </tbody>
+                </table>
             </div>
+        <?php
+                }
+        ?>
         </div>
+    </div>
     </div>
     <!-- akhir tabel -->
 

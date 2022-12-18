@@ -92,10 +92,8 @@
             <li class="nav-item me-3">
               <a class="nav-link active" aria-current="page" href="home">Home</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link me-3" href="order.php" role="button" aria-expanded="false">
-                Order Now
-              </a>
+            <li class="nav-item me-3">
+              <a class="nav-link active" aria-current="page" href="produk">Produk</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -128,9 +126,21 @@
             </ul>
           </li>
           <!-- akhir signin/out -->
+
         </div>
       </div>
     </nav>
+
+    <!-- search -->
+    <nav class="navbar mt-3">
+      <div class="container-fluid d-flex justify-content-end">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+      </div>
+    </nav>
+    <!-- akhir search -->
   </header>
 
 

@@ -77,7 +77,9 @@
 
     <main class="form-signin w-100 m-auto">
         <form class="needs-validation" novalidate action="proses/proses_login.php" method="POST">
-            <h1 class="h2 mb-4 fw-bold">HALAMAN LOGIN GUDANG KITA</h1>
+            <div class="fw-bold text-center">
+                <h2>Halaman Login Gudang UdeTiara</h2>
+            </div>
             <i class="bi bi-house-fill fs-1"></i>
             <h1 class="h3 mb-3 fw-normal">Please Login</h1>
 

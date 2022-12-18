@@ -1,7 +1,8 @@
 <?php
-
 if(isset($_GET['x']) && $_GET['x']== 'home'){
     include 'home.php';
+}elseif(isset($_GET['x']) && $_GET['x']== 'produk'){
+    include 'produk.php';
 }elseif(isset($_GET['x']) && $_GET['x']== 'databarang'){
     include 'databarang.php';
 }elseif(isset($_GET['x']) && $_GET['x']== 'datapegawai'){
@@ -15,4 +16,5 @@ if(isset($_GET['x']) && $_GET['x']== 'home'){
 }else{
     include 'home.php';
 }
+
 ?>
